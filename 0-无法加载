@@ -1,0 +1,26 @@
+1-无法 load 那个  cuda.so.9. 的。应该是需要在  pycharm 里的 terminal 里执行。
+
+2-如果有一大堆 错误。应该是 tensorflow安装太多版本。执行以下
+  650  conda uninstall tensorflow
+  651  pip3 uninstall tensorflow
+  652  conda uninstall tensorflow-gpu
+  653  pip3 uninstall tensorflow-gpu
+  654  pip3 install tensorflow==1.8.0
+  655  ping www.google.com
+  656  ping www.github.com
+  657  history
+  658  conda uninstall tensorflow
+  659  pip3 uninstall tensorflow
+  660  conda uninstall tensorflow-gpu
+  661  pip uninstall tensorflow-gpu
+  662  pip3 uninstall tensorflow-gpu
+  663  pip3 install tensorflow-gpu==1.9.0
+
+
+
+反正执行： pip3 uninstall tensorflow-gpu   重复执行几次，把所有的版本删除。那一大堆错误就消失
+然后在 终端执行：   pip3 uninstall tensorflow-gpu==1.9.0
+
+-=-=-=-=-=反正以下在pycharm 里的   终端执行。
+1：   train_multiobject--caiyong-train.py   先执行. 得出 .h5  训练文件. 已经成功通过
+2：   train_multiobject--caiyong-test.py   后执行. 已经通过
