@@ -21,6 +21,9 @@
 反正执行： pip3 uninstall tensorflow-gpu   重复执行几次，把所有的版本删除。那一大堆错误就消失
 然后在 终端执行：   pip3 uninstall tensorflow-gpu==1.9.0
 
--=-=-=-=-=反正以下在pycharm 里的   终端执行。
+第一：-=-=-=-=-=反正以下在pycharm 里的   终端执行。
 1：   train_multiobject--caiyong-train.py   先执行. 得出 .h5  训练文件. 已经成功通过
 2：   train_multiobject--caiyong-test.py   后执行. 已经通过
+
+
+最后：2019-8-23 最后尝试完以上之后，   鼠标右击直接 按绿色按钮也可以运行。  不需要在pycharm的终端里执行都可以了。
