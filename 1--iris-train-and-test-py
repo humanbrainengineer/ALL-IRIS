@@ -1,0 +1,48 @@
+
+
+1-----------train_multiobject--caiyong-train.py
+
+
+提示： AttributeError: 'NoneType' object has no attribute 'shape'
+
+AttributeError: ‘NoneType’ object has no attribute 'shape’解决方案
+
+在使用OpenCV处理图片时，比如笔者在书写下列代码时：
+
+cv_img = cv2.imread(dataset_root_path + "total/" + filestr + "/img.png")
+self.add_image("shapes", image_id=i, path=img_floder + "/" + imglist[i],
+                               width=cv_img.shape[1], height=cv_img.shape[0], mask_path=mask_path, yaml_path=yaml_path)
+提示笔者：
+
+AttributeError: 'NoneType' object has no attribute 'shape'
+问题分析：
+这个原因是因为找不到这个cv_img 图片。
+解决方案：
+有可能您出现的问题是处在一个循环中，那么找出来的话，可以参考使用抛出异常，具体如下：
+
+cv_img = cv2.imread(dataset_root_path + "total/" + filestr + "/img.png")
+try:                                                                          -------------@@@@@@@@@@@@@就是修改这个～！
+	self.add_image("shapes", image_id=i, path=img_floder + "/" + imglist[i],
+                               width=cv_img.shape[1], height=cv_img.shape[0], mask_path=mask_path, yaml_path=yaml_path)
+except:                                                                         -------------@@@@@@@@@@@@@就是修改这个～！
+    print(dataset_root_path + "total/" + filestr + "/img.png")                  -------------@@@@@@@@@@@@@就是修改这个～！
+那么抛出来的路径，追进去看看，你会发现你的名字可能写错了，总之他找不到了~~~~改了让他找到就行了。
+
+
+
+2---------------------train_multiobject--caiyong-test.py
+
+警告提示：YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+
+ 
+
+YAML 5.1版本后弃用了yaml.load(file)这个用法，因为觉得很不安全，5.1版本之后就修改了需要指定Loader，通过默认加载​​器（FullLoader）禁止执行任意函数，该load函数也变得更加安全
+
+示例：
+
+yaml.load(input, Loader=yaml.FullLoader)    -------------@@@@@@@@@@@@@就是修改这个～！
+还有其他几种Loader，详情可以参考：
+ ———————————————— 
+版权声明：本文为CSDN博主「咸鱼也是有梦想的」的原创文章，遵循CC 4.0 by-sa版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/ly021499/article/details/89026860
+
