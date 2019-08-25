@@ -1,0 +1,7 @@
+from skimage import io,data
+img=data.chelsea()
+roi=img[80:180,100:200,:]   #最后的  冒号： 可以去掉
+io.imshow(roi)
+
+https://www.cnblogs.com/denny402/p/5122112.html
+
