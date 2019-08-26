@@ -1,0 +1,5 @@
+ #以下三行是我设计的方法。
+    #roi = image1[r1['rois'][0][0]: r1['rois'][0][1], r1['rois'][0][2]:r1['rois'][0][3]]
+    #io.imshow(roi)
+    #io.imsave(file_names[x],roi)
+    # -=-=-=-=-=-=-=
