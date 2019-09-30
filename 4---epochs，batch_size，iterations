@@ -36,3 +36,24 @@ one epoch = numbers of iterations = N = 训练样本的数量/batch_size
 
 在LSTM中我们还会遇到一个seq_length,其实 
 batch_size = num_steps * seq_length
+
+
+
+#-=-=-=-=-=-=-=-=-
+
+BATCH SIZE
+　　一个 batch 中的样本总数。记住：batch size 和 number of batches 是不同的。
+
+　　BATCH 是什么？
+
+　　在不能将数据一次性通过神经网络的时候，就需要将数据集分成几个 batch。
+
+　　正如将这篇文章分成几个部分，如介绍、梯度下降、Epoch、Batch size 和迭代，从而使文章更容易阅读和理解。
+
+　　迭代
+　　理解迭代，只需要知道乘法表或者一个计算器就可以了。迭代是 batch 需要完成一个 epoch 的次数。记住：在一个 epoch 中，batch 数和迭代数是相等的。
+
+　　比如对于一个有 2000 个训练样本的数据集。将 2000 个样本分成大小为 500 的 batch，那么完成一个 epoch 需要 4 个 iteration。
+  
+  
+  
