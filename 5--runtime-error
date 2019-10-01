@@ -1,0 +1,13 @@
+报错 RuntimeError: cuda runtime error (59) : device-side assert triggered at /py/conda-bld/pytorch_...
+0.192
+2018.08.16 18:52:16
+字数 117
+阅读 8583
+这个在跑UCF101时候遇到了，其实报错写的很清楚：
+
+libraries/torch/extra/cunn/lib/THCUNN/ClassNLLCriterion.cu:52: void cunn_ClassNLLCriterion_updateOutput_kernel(Dtype *, Dtype *, Dtype *, long *, Dtype *, int, int, int, int) [with Dtype = float, Acctype = float]: block: [0,0,0], thread: [2,0,0] Assertiont >= 0 && t < n_classesfailed.
+
+这是因为标签的索引溢出了，查了一下UCF101的label是从1到101，而索引应该是从0到100，所以把label-1就行了，so easy！
+
+
+#-----------------------------
