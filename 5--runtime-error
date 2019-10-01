@@ -11,3 +11,17 @@ libraries/torch/extra/cunn/lib/THCUNN/ClassNLLCriterion.cu:52: void cunn_ClassNL
 
 
 #-----------------------------
+类别的数量错误@#############################################
+
+
+原创
+RuntimeError: CUDA error: device-side assert triggered void cunn_ClassNLLCriterion_updateOutput_k
+2019-06-27 09:00:10 Turtlelin007 阅读数 583更多
+分类专栏： 踩坑记录
+版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+本文链接：https://blog.csdn.net/weixin_37142859/article/details/93844144
+ RuntimeError: CUDA error: device-side assert triggered
+/opt/conda/conda-bld/pytorch_1549628766161/work/aten/src/THCUNN/ClassNLLCriterion.cu:105: void cunn_ClassNLLCriterion_updateOutput_kernel(Dtype *, Dtype *, Dtype *, long *, Dtype *, int, int, int, int, long) [with Dtype = float, Acctype = float]: block: [0,0,0], thread: [7,0,0] Assertion `t >= 0 && t < n_classes` failed.
+1
+2
+使用pytorch的时候报这个错误说明你label中有些指不在[0, num classes)， 区间左闭右开。比如类别数num_class=3， 你的label出现了-1或者3， 4， 5等！！！！
