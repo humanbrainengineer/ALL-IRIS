@@ -7,7 +7,7 @@ https://pypi.org/project/tensorboard_logger/
 
 from tensorboard_logger import configure, log_value
 
-configure("runs/run-1234", flush_secs=5)
+configure("runs/run-1234", flush_secs=5)   #run-1234  是文件夹名字！！！！！！！！！！！！！！！！！！@@@@
 
 for step in range(1000):
     v1, v2 = do_stuff()
@@ -21,4 +21,40 @@ tensorboard --logdir='./runs'
 
 
 
--=-=-=-=-=-=-=-=-=
+-=-=-=-=-=-=-=-=-=Iris 成功例子
+
+from tensorboard_logger import configure,log_value
+configure("runs/abcdfkk2", flush_secs=3)
+
+#2. evaluate func
+def evaluate(val_loader,model,criterion,epoch):
+    #2.1 define meters
+    losses = AverageMeter()
+    top1 = AverageMeter()
+    #progress bar
+    val_progressor = ProgressBar(mode="Val  ",epoch=epoch,total_epoch=config.epochs,model_name=config.model_name,total=len(val_loader))
+    #2.2 switch to evaluate mode and confirm model has been transfered to cuda
+    model.cuda()
+    #model.eval()
+    with torch.no_grad():
+        for i,(input,target) in enumerate(val_loader):
+            val_progressor.current = i 
+            input = Variable(input).cuda()
+            target = Variable(torch.from_numpy(np.array(target)).long()).cuda()
+            #target = Variable(target).cuda()
+            #2.2.1 compute output
+            output = model(input)
+            loss = criterion(output,target)
+
+            #2.2.2 measure accuracy and record loss
+            precision1,precision2 = accuracy(output,target,topk=(1,2))
+            losses.update(loss.item(),input.size(0))
+            top1.update(precision1[0],input.size(0))
+            val_progressor.current_loss = losses.avg
+            val_progressor.current_top1 = top1.avg
+            val_progressor()
+        val_progressor.done()
+        log_value('V1',top1.avg,epoch)       ###################################
+
+
+    return [losses.avg,top1.avg]
