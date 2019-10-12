@@ -1,0 +1,11 @@
+下载下来的 iris是bmp的 灰图的三通道，这个是不能被inception这种3通道的模型识别。这样很矛盾。
+灰图一般是 单通道，最后的#（100，100，#）不显示，是显示成了（100，100）
+
+用d-stack function的话   组合 原来的 bmp三通道 成为新的一个bmp三道题图是不行的，
+因为ut---iris的gray是假的三通道，需要用到 numpy函数 cv2.cvtColor（abc，cv2.COLOR_BGR2GRAY）先转为真的gray单通，
+再d---stack操作后，3个单通道的灰图重叠为一个3维（层）图， 成为一个  新的bmp三通道的图就可以被 inception 识别了。
+
+
+
+
+
