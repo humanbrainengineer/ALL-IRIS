@@ -905,17 +905,7 @@ InceptionV4Wrapper(
   (fc): Identity()
 )
 
-#------------
-    My_model = make_model( 'inception_v4', config.num_classes, pretrained=True, input_size=(299, 299)) #classifier_factory=make_classifier
-
-    My_model.avgpool1 = nn.AdaptiveAvgPool2d(3)
-    My_model.avgpool2 = nn.AdaptiveAvgPool2d(2)
-    My_model.avgpool3 = nn.AdaptiveAvgPool1d(1)
-
-    My_model.fc = nn.Identity(1536,config.num_classes)
-    print(My_model)
-    #print(model.orginal_model_info.mean)
-    return My_model
+---看iris 文件夹设计图，
 
 
 #classifier_factory=make_classifier  这个版本的这个函数可以使用。  也可不使用
