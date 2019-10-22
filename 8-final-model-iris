@@ -1,3 +1,16 @@
+/usr/bin/python3.6 /home/eth/PycharmProjects/2.1-iris-recog双模型/pytorch-image-classification-master---第二版-test-ok201909-2nd-paper-fine-tuned-Inception-v4-tensorboardX/main.py
+/home/eth/.local/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:523: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/home/eth/.local/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:524: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/home/eth/.local/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:525: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/home/eth/.local/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:526: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/home/eth/.local/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:527: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/home/eth/.local/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:532: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
 InceptionV4Wrapper(
   (_features): Sequential(
     (0): BasicConv2d(
@@ -891,3 +904,19 @@ InceptionV4Wrapper(
   (avgpool3): AdaptiveAvgPool1d(output_size=1)
   (fc): Identity()
 )
+
+#------------
+    My_model = make_model( 'inception_v4', config.num_classes, pretrained=True, input_size=(299, 299)) #classifier_factory=make_classifier
+
+    My_model.avgpool1 = nn.AdaptiveAvgPool2d(3)
+    My_model.avgpool2 = nn.AdaptiveAvgPool2d(2)
+    My_model.avgpool3 = nn.AdaptiveAvgPool1d(1)
+
+    My_model.fc = nn.Identity(1536,config.num_classes)
+    print(My_model)
+    #print(model.orginal_model_info.mean)
+    return My_model
+
+
+#classifier_factory=make_classifier  这个版本的这个函数可以使用。  也可不使用
+#因为对提升准确率的效果帮助不大。
